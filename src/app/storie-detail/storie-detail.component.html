@@ -1,0 +1,46 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Curso Angular</span>
+  </mat-toolbar>
+  <nav>
+    <a>
+      <button mat-button color="primary" (click)="onHome()">
+        Volver A Home
+      </button>
+      
+    </a>
+    <a>
+      
+    </a>
+  </nav>
+  
+<div class="container" *ngIf="post">
+    <h2>Edit "{{post.title}}"</h2>
+    <form #PostForm="ngForm" #PostForm="ngForm">
+      <div class="form-group" [ngClass]="{'has-error':title.invalid && title.touched}" >
+        <label class="control-label" for="title">Title (*)</label>
+        <input #title="ngModel" id="title" type="text" name="title" class="form-control"
+         [(ngModel)]="post.title" required>
+         <div class="text-danger" *ngIf="title.invalid && title.touched">
+           Title is required
+         </div>
+      </div>
+      
+      <div class="form-group" [ngClass]="{'has-error':overview.invalid && overview.touched}">
+        <label class="control-label" for="overview">Overview (*)</label>
+        <input #overview="ngModel" id="overview" type="text" name="overview" class="form-control"
+        [(ngModel)]="post.body" required>
+      </div>
+  
+      <button type="submit" class="btn btn-success" (click)="onUpdate(post)"
+              [disabled]="PostForm.form.invalid">
+        Submit
+      </button>
+    </form>
+  </div>
+  
+  <pre>
+    {{post | json}}
+  </pre>
